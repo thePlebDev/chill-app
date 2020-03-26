@@ -8,6 +8,7 @@ import App from './components/App';
 import chillReducer from './Redux/Reducers/MainReducer.js';
 
 const store = createStore(chillReducer)
+console.log(store.getState())
 
 ReactDOM.render(
   <Provider store={store}>

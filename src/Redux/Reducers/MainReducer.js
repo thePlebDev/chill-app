@@ -1,5 +1,7 @@
-// our reducer has to stay pure. It will take in the previousState plus an action and give us the next state
+import { combineReducers } from 'redux';
+
 import initialState from './State';
+
 import { NOT_CHILL,CHILL } from '../ActionCreators/actionTypes';
 
 
@@ -19,20 +21,31 @@ function chillReducer(state = initialState,action){
       }
       default:
         return state
-
-      case NOT_CHILL:
-      return {...state,
-        notChill:[
-          ...state.notChill,
-          {
-            type:NOT_CHILL,
-            lat:action.payload.lat,
-            lon:action.payload.lon
-          }
-        ]
-      }
     }
 
 }
 
-export default chillReducer
+function notChillReducer(state= initialState,action){
+  switch(action.type){
+    case NOT_CHILL:
+    return {...state,
+      notChill:[
+        ...state.notChill,
+        {
+          type:NOT_CHILL,
+          lat:action.payload.lat,
+          lon:action.payload.lon
+        }
+      ]
+    }
+    default:
+      return state
+  }
+}
+
+const reducers = combineReducers({
+  chillReducer,
+  notChillReducer
+})
+
+export default reducers

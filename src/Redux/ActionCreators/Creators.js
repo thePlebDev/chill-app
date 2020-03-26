@@ -1,13 +1,14 @@
 import { NOT_CHILL,CHILL } from './actionTypes';
 
 
-function chill(lat,lon){
+function chill(a,b){
+  console.log('chill fired')
   return{
     type:CHILL,
     payload: {
       text:'chill',
-      lat:lat,
-      lon:lon
+      lat:a,
+      lon:b
     }
   }
 }
