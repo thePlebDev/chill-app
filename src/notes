@@ -63,3 +63,70 @@ the call with an invocation or either the rejection/ resolve function.
 - actually the chill function is being called. SO the problem must fall to the reducer.the action creator is being
 called but it isnt actually changing the state.
 - I think that my problem is that I am not dispatching the action with the literal dispatch method
+
+------------------------------------TESTING----------------------------------------------------------------------------------
+- I installed es lint and I am starting to configure it a bit
+-the rules of test driven development
+1)program the tests first
+2)Run the tests and watch them fail(red), before you write the code
+3)write the minimum amount of code required to make the tests pass(green)
+4)refector the code and tests(gold)
+5) once the code has passed the tests, it is then time to take a closer look at your code and make it more beautiful
+
+- now we will be testing reducers, since reducers are pure functions that calculate and return data based on their
+input arguments. If we can control the input, then we can predict the output
+- so es lint is not acctualy a testing framework. It does what is called linting. linting basically analyzes the
+codes syntax for errors. It is to make sure that we have proper code formatting. It is not a testing framework
+- now we have to install a testing framework
+- so I now have jest installed globally so i can run it from anywhere and as a dependency on my project.
+- so this is how it would go. you create your file and then you do a module.export of the function
+- then you create the test file, called whatever.test.js i beleive the .test is used to tell jest what file to test
+- you then import the function with a require(filepath). then follow the required testing function calls.
+
+what is the module.export:
+- it seems that it is the way that node exports stuff from one file to another
+
+ what is the require('./filepath')
+ - on a side note, I see the commonJS module pattern mentioned everywhere, later when I refactor my code, after I am
+ done with the tests. I will have to look into it.
+- the require is the way that you import functions(modules) into other files.
+
+- so apparently jest has two important functions. one is called describe, which is used to create a suite of tests
+and it, which is used for each test.
+- you would use describe to block together several related tests
+-the it function is literally the same thing as test function. so the two can be switched out.
+- so basically we will import the reducer, give it a fake action and state and then use .expect to say what we
+expect the result to be
+- so first lets get some tests up and running for the syncronous reducer
+- combine Reducers looks like it is just returning an object and I can use dot notation to access the reducers
+for the tests
+- so the importing funcitons into my test suits is going a little weird with all my spaghetti code. I think its
+time to make things modular.
+- the problem that I am getting is an import problem and that could be do to the fact that I am running it on node
+and node wants to use moduels instead of the normal import statements. So I think If i just import everything
+normaly and then run it with jest, then it should all work out ok.
+- now I am installing some decencies that are needed for testing in Redux
+
+-with all the importing that I am doing, I think I should just make my code modular now, so that IT doesnt get
+worse than it already is.
+- well I guess actually I am suppose to do the tests first so that is what I will do.
+- first I will import the action creators into my test file.
+- so I have installed everything and configured the code, so that jest recognizes the import statements.
+- the problem that I am starting to have now is that the I am getting the error that toBe or toEqual is not a function
+- I have a theory that this could be the error that gets thrown out when the code is wrong, so I will run it with
+code that i know is 100% the same
+- So my hypothesis was right, it only seems to throw that error when the functions are different. now to really
+test that I will now make the chill and the expected actions be the exact same thing
+- now I have a better understanding about why it was throwing that error, for the moment is seems that it was
+throwing that error because either the return value was not the correct type or because the functions were not
+the same.
+- I think that the return value must not be correct because jest is used by Facebook and i doubt that they would
+throw this weird error for something as simple as the functions don't match.
+- now I am going to have to add the actions information back line by line to test and see where it trips up.
+not the most effective but It will work.
+
+
+------------------------------------MODULAR CODE----------------------------------------------------------------------
+- the genral idea is to encapsulate the private data througha wrapper function
+- the basic pattern and the one I am going to probably use is the module pattern
+- the module pattern can be done through an iife
