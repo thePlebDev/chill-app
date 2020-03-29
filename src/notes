@@ -1,0 +1,54 @@
+-----------------------------------------ASYNC ACTIONS-----------------------------------------------------------------
+- first thing is to decide how to structure the action
+- we will create the action and then then I think the actual api call get passed into it
+- we will have to rework the state
+
+- we are going the multiple type approach with the actions because it will leave less room for errors
+-I am dumb, I should just make the action creators that I have now into async Creators
+- normaly an action creator will return an object but with middleware in play it allows us to return functions
+- these returned functions will be used to make async calls and will be called by the middleware
+- this action creator becomes a thunk
+
+- so the way that they have it is that they have one big asyn function with three smaller funtions running inside of it
+- so I think that my smaller action creators that I currently have are going to be the smaller functions that I
+will call in my larger async action creator. I will have them be returned and then they can be called by the middleware
+
+- I think I know where things are going now.
+- basically we have an action creator that returns a function and inside that function we have some async code run
+and then we will pass the results of that code into our normal synchronous action creator.
+- so now I will go read up on async programming and promises. we are going to use a promise to make the api call
+
+PROMISES
+-the promise object represents the completion or failure of the async operation. its an intermediate state
+- the .then() are used for callback functions that will run if the previous operation is successful
+-async operations like promises are put into an event queue.which runs after the main thread
+- we are going to place our action creator call inside of an .then()method
+- so I will create a new promise and
+- the promise constructor is used to wrap functions that do not already support promises
+- the new promise object takes an executor function as a parameter
+- the executor is custom code but it should go like this. executor(resolutionFunc, rejectionFunc)
+- so it goes like this, the operation within the executor is asynchronous and provides a callback. the callback
+within the executor code.The callback terminates by invoking resolutionFunc. The invocation of resolutionFunc includes
+a value parameter. The value is passed back to the tethered PromiseObj. The promiseObj the asynchronous invokes the
+.then() associated with it
+- right, so we have to write the executor. for the executor is just going to be a callback function. Just so I can see
+how things are working out.
+- not sure if my implementation works or not. but I have to put in the middleware before I can find out.
+
+--------------------------------------MIDDLESWARE---------------------------------------------------------------------------
+-in Redux MiddleWareprovides a third party extension point between dispatching an aciton and the moment it reaches
+the reducer
+- we are going to monkeypatch the dispatch function. Since the redux store is just a plain object with a few methods
+ we just access the dispatch method on the state object and change it
+ - the Redux documentation has a lot of info about making your own middleware but for the moment I want to just use
+ the recommended redux-thunk
+
+ -I honest just might be doing a whole code redo with some new libraries to make things clean
+ - right now I am just going to try and get the thing to work
+
+ WHAT IS A THUNK
+- generally thunks are a functional propgramming technique used to delay computation
+- the idea is that you return a function that will be called later
+- redux-thunk passes two arguments to the think: dispatch and getState.
+- now if everything workouts out as planned, this should work as planned
+- it didnt go to plan. The problem that I am having right now is that the chill reducer isn't being run

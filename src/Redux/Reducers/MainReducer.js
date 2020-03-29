@@ -9,7 +9,7 @@ function chillReducer(state = initialState,action){
   // this is the main reducer
     switch(action.type){
       case CHILL:
-      return {...state,
+      return {
         ChillState:[
           ...state.ChillState,
           {
@@ -19,6 +19,8 @@ function chillReducer(state = initialState,action){
           }
         ]
       }
+
+
       default:
         return state
     }
@@ -28,7 +30,7 @@ function chillReducer(state = initialState,action){
 function notChillReducer(state= initialState,action){
   switch(action.type){
     case NOT_CHILL:
-    return {...state,
+    return {
       notChill:[
         ...state.notChill,
         {
@@ -42,10 +44,5 @@ function notChillReducer(state= initialState,action){
       return state
   }
 }
-
-const reducers = combineReducers({
-  chillReducer,
-  notChillReducer
-})
-
+const reducers = combineReducers({chillReducer,notChillReducer})
 export default reducers

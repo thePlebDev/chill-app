@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { chill,notChill } from '../Redux/ActionCreators/Creators';
+import { chill,notChill,getGeoAPI } from '../Redux/ActionCreators/Creators';
 import geoapi from '../GeoLocationAPI/GAPI'
 import {NOT_CHILL,CHILL} from '../Redux/ActionCreators/actionTypes'
 
 
 
 const Chill = (props)=>{
+
   return (
     <div className="chill-container">
         <Link to="/data">
@@ -16,25 +17,26 @@ const Chill = (props)=>{
         </Link>
         <hr/>
         <h3>My current location is....</h3>
-          <button className='chill-button' onClick={()=>props.chill(geoapi(CHILL))}>Chill</button>
-          <button className='not-chill-button' onClick={()=>props.notChill(geoapi(NOT_CHILL))} >Not Chill</button>
+          <button className='chill-button' onClick={props.getGeoAPI} >Chill</button>
+          <button className='not-chill-button' onClick={props.notChill} >Not Chill</button>
 
     </div>
   )
 }
 
-const mapStateToProps =({chillReducer,notChillReducer})=>{
-  // this is giving me undefined for some reason.
-
-  return {
-    chillReducer,
-    notChillReducer
-  }
+const mapstateToProps =function(state){
+  //this is how our component would be made aware of the state
+  console.log(state)
+  return{}
 }
-// I want action creators to happen here
 
-const actionCreators = {
+const actioncreators ={
+  // this is where our component gets acces to aciton creators
   chill,
-  notChill
+  notChill,
+  getGeoAPI
 }
-export default connect(mapStateToProps,actionCreators)(Chill)
+
+
+const ChiillConnect = connect(mapstateToProps,actioncreators)(Chill)
+export default ChiillConnect

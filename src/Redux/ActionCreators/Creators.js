@@ -1,14 +1,14 @@
-import { NOT_CHILL,CHILL } from './actionTypes';
+import { NOT_CHILL,CHILL,REQUEST_API } from './actionTypes';
+import GEO from '../../GeoLocationAPI/GAPI'
 
 
-function chill(a,b){
-  console.log('chill fired')
+function chill(){
   return{
     type:CHILL,
     payload: {
       text:'chill',
-      lat:a,
-      lon:b
+      lat:0,
+      lon:0
     }
   }
 }
@@ -23,5 +23,19 @@ function notChill(lat,lon){
     }
   }
 }
+function getGeoAPI(){
 
-export {chill,notChill}
+  // this will get called and turned into a thunk with the middleware, will return a function instead of an object
+  // the middleware will run the function
+  return function(dispatch){
+
+    return new Promise(
+      GEO('CHILL')
+    )
+    .then(()=>console.log('this is being called'))
+  }
+
+
+}
+
+export {chill,notChill,getGeoAPI}
