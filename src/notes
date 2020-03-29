@@ -52,3 +52,14 @@ the reducer
 - redux-thunk passes two arguments to the think: dispatch and getState.
 - now if everything workouts out as planned, this should work as planned
 - it didnt go to plan. The problem that I am having right now is that the chill reducer isn't being run
+-as i suspected, it is my .then()method that is not working properly. it just isn't being called.
+- Think I know what is wrong, I didn't pass any functions into my executor function. This is what is causing the problem.
+- the executor by itself has no meaningful return value, it communicates via the side-effect caused by the resolution or
+rejectionFunc. the side effect is that the promiseObj becomes settled
+-so to solve my problem, the only thing that I need to do is add the function that I am going to call in as a parameter
+- the executor has the opportunity to perform some operation and then reflect the operation's outcome. but returning
+the call with an invocation or either the rejection/ resolve function.
+- we have now got the .then() being called. The problem now is getting the action creator to fire
+- actually the chill function is being called. SO the problem must fall to the reducer.the action creator is being
+called but it isnt actually changing the state.
+- I think that my problem is that I am not dispatching the action with the literal dispatch method

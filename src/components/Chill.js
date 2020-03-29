@@ -17,7 +17,7 @@ const Chill = (props)=>{
         </Link>
         <hr/>
         <h3>My current location is....</h3>
-          <button className='chill-button' onClick={props.getGeoAPI} >Chill</button>
+          <button className='chill-button' onClick={props.chill} >Chill</button>
           <button className='not-chill-button' onClick={props.notChill} >Not Chill</button>
 
     </div>

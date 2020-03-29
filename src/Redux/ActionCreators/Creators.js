@@ -3,6 +3,7 @@ import GEO from '../../GeoLocationAPI/GAPI'
 
 
 function chill(){
+  console.log('this is inside of the chill function')
   return{
     type:CHILL,
     payload: {
@@ -24,15 +25,15 @@ function notChill(lat,lon){
   }
 }
 function getGeoAPI(){
-
   // this will get called and turned into a thunk with the middleware, will return a function instead of an object
   // the middleware will run the function
   return function(dispatch){
-
-    return new Promise(
-      GEO('CHILL')
-    )
-    .then(()=>console.log('this is being called'))
+    return new Promise((GEO)=>{
+    //passing in GEO as the resolve function
+      // creating a new promise because the GEOAPI is callback based
+      GEO('CHILL');// operations within the executor is asnchronous and provides a callback
+      // call the GEO function. the promise will return a new promise . Making the .then() be able to be called
+    }).then(()=> dispatch(chill()) )
   }
 
 
