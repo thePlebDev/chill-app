@@ -1,12 +1,32 @@
 import {chill,notChill,getGeoAPI} from '../../Redux/ActionCreators/Creators';
-import { CHILL } from '../../Redux/ActionCreators/actionTypes';
+import { CHILL,NOT_CHILL } from '../../Redux/ActionCreators/actionTypes';
 
 function add(){
     return 3
 }
 describe('actions',()=>{
     test('should create an action to add chill location to the state',()=>{
-        const expectedAction ={type:CHILL}
-        expect(chill()).toEqual(expectedAction)
+        const expectedAction ={
+            type:CHILL,
+            payload:{
+                text:'chill',
+                lat:0,
+                lon:0
+            }
+
+        }
+        expect(chill(0,0)).toEqual(expectedAction)
+    })
+
+    test('should create an action to add chill location to the state',()=>{
+        const expectedAction={
+            type:NOT_CHILL,
+            payload:{
+                text:'notChill',
+                lat:0,
+                lon:0
+            }
+        }
+        expect(notChill(0,0)).toEqual(expectedAction)
     })
 })

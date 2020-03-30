@@ -1,19 +1,17 @@
-import { NOT_CHILL,CHILL,REQUEST_API } from './actionTypes';
+import { NOT_CHILL,CHILL} from './actionTypes';
 import GEO from '../../GeoLocationAPI/GAPI'
 
 
 
-function chill(){
-    console.log('this is inside of the chill function')
-    let a = { type:CHILL}
-    return a
-        // type:CHILL,
-        // payload: {
-        //     text:'chill',
-        //     lat:0,
-        //     lon:0
-        // }
-
+function chill(lat,lon){
+    return {
+        type:CHILL,
+        payload:{
+            text:'chill',
+            lat:lat,
+            lon:lon
+        }
+    }
 }
 
 function notChill(lat,lon){
@@ -26,19 +24,25 @@ function notChill(lat,lon){
         }
     }
 }
-function getGeoAPI(){
-    // this will get called and turned into a thunk with the middleware, will return a function instead of an object
-    // the middleware will run the function
-    return function(dispatch){
-        return new Promise((GEO)=>{
-            //passing in GEO as the resolve function
-            // creating a new promise because the GEOAPI is callback based
-            GEO('CHILL');// operations within the executor is asnchronous and provides a callback
-            // call the GEO function. the promise will return a new promise . Making the .then() be able to be called
-        }).then(()=> dispatch(chill()) )
+
+
+function getGeoAPI(event){
+    if (event.target.className === 'chill-button'){
+        console.log(event.target.className)
+        return function(dispatch){
+            let lat = localStorage.getItem('lat')
+            let lon = localStorage.getItem('lon')
+            dispatch(chill(lat,lon))
+        }
+    }else{
+        console.log(event.target.className)
+        return function(dispatch){
+            let lat = localStorage.getItem('lat')
+            let lon = localStorage.getItem('lon')
+            dispatch(notChill(lat,lon))
+        }
     }
-
-
 }
+
 
 export {chill,notChill,getGeoAPI}

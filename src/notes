@@ -124,6 +124,67 @@ the same.
 throw this weird error for something as simple as the functions don't match.
 - now I am going to have to add the actions information back line by line to test and see where it trips up.
 not the most effective but It will work.
+- so right off the bat I have a problem, it could steam from the fact that the chill action creator is returning
+an object and the expected action is returning a reference to an action. That is the only reason I can think of
+for why its not running properly.
+- I changed matcher function from toBe to toEqual and that seemed to make things work. I will read up more on
+toEqual() to find out why it worked this way
+- so i guess when the error says toBe is not a function I should listen to it, because when I changed to a different
+matcher function it worked.... FML
+- now everything seems to work
+
+toEqual(value)
+- it recursively calls object.is to compare the privative value(data that is not an object or has methods)
+Object.is() is a method that determines whether two values are the same value. It is not the same as loose or strict
+equality Object.is() is a new ES2015 comparison. it does not type coersion and does not handle special cases
+
+-now i will get the synchronous action creator up and going and then ill go after the async one
+- cool so now the test are seeming to all work.
+- so now I have the synchronous actions working. I will get async one up and running
+- for some reason my async action isnt working, time to make it work again
+
+-----------------------------------BACK TO THE ASYNC ACTION-------------------------------------------------------
+- I thought that I had finished this but when I went to run the tests, it appears that I just got it to fire and
+not actually return anything
+- I think That trying to force the api into a promise might be a mistake, I should just use a callback instead
+- you put the async keyword infront of a function to turn it into a async function. this means that it takes
+place in the event que and it returns a promise
+- so maybe I could make the function that gets called by the thunk middleware into an async one, this would give us
+the promise that we are trying to get. I will read more and report back
+- so the middleware is going to return a function and that function can return a value. In our case that value
+is going to be a promise.
+- the await keyword causes the async function to pause until a Promise is settled after it is settled, the function
+is returned
+- so what we want to do is have an async function make an await call the GEO api and then return that value. That
+value should be a promise and then we make the dispatch call with that value. easy peasy lemon squeezy.
+- an await can split execution flow. allowing the caller of the await's function to resume execution. I think
+in our case, everything should be fine.
+- we are getting the value, we are just not waiting for the call to happen
+
+ASYN CALLBACKS
+- functionst that are specified as arguments when calling a function which will start executing code in the
+background , when the background code finishes then the callback function is fired
+- so I need to read up on callbacks
+- I think I turn it inro a function using the async/await keywords
+- you put the async keyword infront of a function and it lets you use the await keyword
+- their return values are guaranteed to be converted to promises
+
+- so my fault obvously lis in not understanding async code.
+- I beleive that my struggle with the api is my lack of understanding of async code. I will now read up on async code
+- the two types are callbacks and promises
+- it seems like we have a promise run, make the call and then when the info is returned back have the action
+dispatched with the geo location info that is returned back
+- async operations like promises are put into the event queue which runs after the main thread
+- I should understand how the async data flow works with redux first and then design my code
+
+- the function called by the thunk middleware can return a value, that is passed on as the return value
+of the dispatch method. in the example they return a promise to wait for. this is not required by the middleware
+but it is convient. SO I think we have to return a promise and then make the dispatch inside the .then() method
+- also don't use catch inside in this redux function, it will cause a loop
+- So I have not been able to crack the code on what the hell is happening with the promises and API but I think
+I found another way around. i will get the initial values on load, store them in the local storage and then
+get thos values to the actions when the button is clicked, so they can be dispatched.
+
 
 
 ------------------------------------MODULAR CODE----------------------------------------------------------------------
