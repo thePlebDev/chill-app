@@ -4,9 +4,10 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { combineReducers } from 'redux';
 
 import App from './components/App';
-import chillReducer from './Redux/Reducers/MainReducer.js';
+import {chillReducer,notChillReducer} from './Redux/Reducers/MainReducer.js';
 import showPositionChill from './GeoLocationAPI/GAPI';
 
 
@@ -19,10 +20,10 @@ if (navigator.geolocation){
 
 }
 
-
+const reducer = combineReducers({chillReducer,notChillReducer})
 
 const store = createStore(
-    chillReducer,
+    reducer,
     applyMiddleware(thunk)
 )
 

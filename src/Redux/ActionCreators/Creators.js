@@ -3,7 +3,9 @@ import GEO from '../../GeoLocationAPI/GAPI'
 
 
 
-function chill(lat,lon){
+function chill(){
+    let lat = localStorage.getItem('lat')
+    let lon = localStorage.getItem('lon')
     return {
         type:CHILL,
         payload:{
@@ -14,7 +16,9 @@ function chill(lat,lon){
     }
 }
 
-function notChill(lat,lon){
+function notChill(){
+  let lat = localStorage.getItem('lat')
+  let lon = localStorage.getItem('lon')
     return{
         type:NOT_CHILL,
         payload:{
@@ -26,23 +30,6 @@ function notChill(lat,lon){
 }
 
 
-function getGeoAPI(event){
-    if (event.target.className === 'chill-button'){
-        console.log(event.target.className)
-        return function(dispatch){
-            let lat = localStorage.getItem('lat')
-            let lon = localStorage.getItem('lon')
-            dispatch(chill(lat,lon))
-        }
-    }else{
-        console.log(event.target.className)
-        return function(dispatch){
-            let lat = localStorage.getItem('lat')
-            let lon = localStorage.getItem('lon')
-            dispatch(notChill(lat,lon))
-        }
-    }
-}
 
 
-export {chill,notChill,getGeoAPI}
+export {chill,notChill}

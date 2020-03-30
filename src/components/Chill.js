@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { chill,notChill,getGeoAPI } from '../Redux/ActionCreators/Creators';
+import { chill,notChill, } from '../Redux/ActionCreators/Creators';
 import geoapi from '../GeoLocationAPI/GAPI'
 import {NOT_CHILL,CHILL} from '../Redux/ActionCreators/actionTypes'
 
@@ -17,8 +17,8 @@ const Chill = (props)=>{
         </Link>
         <hr/>
         <h3>My current location is....</h3>
-          <button className='chill-button' onClick={props.getGeoAPI} >Chill</button>
-          <button className='not-chill-button' onClick={props.getGeoAPI} >Not Chill</button>
+          <button className='chill-button' onClick={props.chill} >Chill</button>
+          <button className='not-chill-button' onClick={props.notChill} >Not Chill</button>
 
     </div>
   )
@@ -34,8 +34,6 @@ const actioncreators ={
     // this is where our component gets acces to aciton creators
     chill,
     notChill,
-    getGeoAPI
-
 }
 
 

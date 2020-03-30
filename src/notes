@@ -185,9 +185,28 @@ but it is convient. SO I think we have to return a promise and then make the dis
 I found another way around. i will get the initial values on load, store them in the local storage and then
 get thos values to the actions when the button is clicked, so they can be dispatched.
 
+-ok so I used local session storage to get around the problem I was having with the GEO location api
+- now I will start on the async tests
 
 
-------------------------------------MODULAR CODE----------------------------------------------------------------------
-- the genral idea is to encapsulate the private data througha wrapper function
-- the basic pattern and the one I am going to probably use is the module pattern
-- the module pattern can be done through an iife
+
+------------------------------------ASYNC ACTION TESTS----------------------------------------------------------------------
+- for testing actions that use middleware, it is best to just 100% mock the Redux store for the test
+- we will need to use redux-mock-store and fetch-mock
+- I actually don't think that I need to use the fetch-mock because im not fetching anything
+- for the time being we are just going to ignore that async action tests, we are going to move onto reducers. THe
+file that it is telling me to install is throwing some funky errors. so For the time being i will just move onto
+the reducers
+- the mock store will create an array of dispatched actions which serve as an action log for tests
+- I just realized that I don't even think that my actions are actually async.
+- so turns out my actions arent even async any more.... well I guess that clears things up a bit.
+-----------------------------------REDUCER TESTS----------------------------------------------------------------------------
+- reducers should return the new state after applying the action to the previous state and that's the behavior
+tested
+- the first thing that we will do is inport the reducers and the types
+
+----------------------------------COMPONENT TESTS----------------------------------------------------------------------------
+-A component is usually small and only rely on their props. This makes them easy to test
+- we need to install enzyme
+- apparently what was happening with my npm install was a weird but, that was solved with deleting my package-lock.json and my node
+modules. then I ran npm install and that seemed to smooth the problem out.
