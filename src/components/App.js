@@ -14,7 +14,7 @@ const App = () =>{
         <Chill />
       </Route>
       <Route path="/data">
-        <ChillData />
+        <ChillData name='jeff' />
       </Route>
       </Switch>
 

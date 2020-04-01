@@ -210,3 +210,49 @@ tested
 - we need to install enzyme
 - apparently what was happening with my npm install was a weird but, that was solved with deleting my package-lock.json and my node
 modules. then I ran npm install and that seemed to smooth the problem out.
+- independant components are components that their rendering does not depend on the other components
+- the most complicated for testing are the HOC ones, basically the components that get passed to the connect function
+- we should test the lest complicated one first and leave the more complicated ones like the connect ones for later
+- things that can get ommited from testing are, third party libraries,constants, line line styles
+and i think you are suppose to test wrapper components seperatly
+
+- when testing components, they usually only rely on their props
+- to test the componenets we make a setup() helper that passes the stubbed callbacks as props and renders
+the component with shallow rendering
+- shallow rendering lets us test a component as a unit and to ensure that the tests arent intruding on other tests
+
+- we set up the adapter for enzyme. Then we set up the setup() function to pass the callbacks as props, we completely
+replace the functions with jest
+- so to me it seems like you wrap the component in the shallow wrapper, along with its props and then you use
+.find() to see if the component has what it suppose to have
+
+-----------------------------------TESTING CONNECTED COMPONENTS--------------------------------------------------------------
+  - when you import a component that is wrapped with the connect method you are not just importing the plain component
+  - in order to test the component without the react store, you must also export the plain componenet
+
+  - main notes on component testing
+  1)
+  One component should have only one snapshot
+
+  2)
+  Testing props. you should first test the default prop values and then test the custom prop values
+
+  3)
+  Test the data types. This can be done with an extension of the jest library
+
+  4)
+  Event Testing
+
+  - the main idea in this resting seems to be that we shallow render the component and then we use find() to
+  see if the thing we want is in component.
+  - am am having some trouble so I am breaking down the tests into the simplest one I can.
+  - so apparently the problem is with jest and not my code. I think I have to write a transform file to configure jest
+  - HOLY MOLLY I GOT THE TESTS TO WORK!! so aparently my babel file was not properly configured and not in the right
+  spot. so I added the right configs after googling the error and reading babel documentation.
+  - so when testing for props, I think you need to stubb all the props and create new ones for the tests
+
+----------------------------------CREATING THE BACKEND-----------------------------------------------------------------------
+- i tried to create a backend using express and I really messed up like had to clone the respository because
+npm wouldnt event work. so I decied that maybe my first app shouldn't be a full stack one. For now I will Just
+stick to a front end application and try to make it the best one I can.... I am trying to become a frontend
+developer after all. SO now I will go back to testing the components
