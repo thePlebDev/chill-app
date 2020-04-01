@@ -11,7 +11,7 @@ const App = () =>{
     <div className="container">
       <Switch>
       <Route exact path="/">
-        <Chill />
+        <Chill/>
       </Route>
       <Route path="/data">
         <ChillData name='jeff' />

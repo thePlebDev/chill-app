@@ -2,7 +2,7 @@
 import { chillReducer,notChillReducer } from '../../Redux/Reducers/MainReducer'
 
 describe('chill reducer',()=>{
-  test('should return the initial state', () =>{
+  it('should return the initial state', () =>{
     expect(chillReducer(undefined,{})).toEqual({ChillState:[
             {
                 type:'Chill',
@@ -20,4 +20,5 @@ describe('chill reducer',()=>{
         ]
         })
     })
+
 })

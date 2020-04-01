@@ -250,9 +250,6 @@ replace the functions with jest
   - HOLY MOLLY I GOT THE TESTS TO WORK!! so aparently my babel file was not properly configured and not in the right
   spot. so I added the right configs after googling the error and reading babel documentation.
   - so when testing for props, I think you need to stubb all the props and create new ones for the tests
-
-----------------------------------CREATING THE BACKEND-----------------------------------------------------------------------
-- i tried to create a backend using express and I really messed up like had to clone the respository because
-npm wouldnt event work. so I decied that maybe my first app shouldn't be a full stack one. For now I will Just
-stick to a front end application and try to make it the best one I can.... I am trying to become a frontend
-developer after all. SO now I will go back to testing the components
+  - the TDD approach is a way to ensure that the tests that you have written are correct
+  -now I am testing the PropTypes but I see in the documentation that the PropTypes are only checked in development mode
+  
